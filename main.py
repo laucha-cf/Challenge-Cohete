@@ -1,6 +1,7 @@
 import pandas as pd
 from read_files import create_dataframes, extract_files, load_files
 from normalize_data import normalize_museos, normalize_cines, normalize_bibliotecas
+from new_tables import create_master_table, create_new_table
 
 
 if __name__ == '__main__':
@@ -17,4 +18,13 @@ if __name__ == '__main__':
     df_bibliotecas = normalize_bibliotecas(df_bibliotecas.copy())
 
     #Creamos tabla única
-    df_master = pd.concat([df_cines, df_museos, df_bibliotecas], axis=0)
+    df_master = create_master_table([df_cines, df_museos, df_bibliotecas])
+    
+    #Creamos nuevas tablas
+    registros_por_categoria = create_new_table(df_master.copy(),
+                                               ['categoria'])
+    registros_por_fuente = create_new_table(df_master.copy(), 
+                                            ['categoria'])
+    registros_provincia_categoria = create_new_table(df_master.copy(), 
+                                                    ['provincia','categoria'])
+    

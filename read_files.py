@@ -1,6 +1,7 @@
 import pandas as pd
 import datetime as dt
 import os
+import shutil
 
 list_categories = ['museos', 'cines', 'bibliotecas']
 
@@ -54,12 +55,17 @@ def extract_files(list_dataframes):
         url = f'https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet'
         url = url.format(sheet_id, list_categories[i])
         list_dataframes[i] = pd.read_csv(url)
-        #Crea el path donde se almacenará
+        #Crea el path donde se almacenará el archivo (si no existe)
         path = create_path(list_categories[i])
         #Crea el nuevo directorio donde se almacenará
         list_path = path.split('/')
         new_dir = f'{list_path[0]}/{list_path[1]}'
+        
+        if os.path.exists(new_dir):
+            shutil.rmtree(f'{list_categories[i]}/')
+
         os.makedirs(new_dir)
+        
         #Guarda el archivo en el directorio creado
         list_dataframes[i].to_csv(path, index=False)
                
