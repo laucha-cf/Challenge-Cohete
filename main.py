@@ -1,17 +1,15 @@
 import pandas as pd
-from read_files import create_dataframes, read_files
+from read_files import create_dataframes, extract_files, load_files
 from normalize_data import normalize_museos, normalize_cines, normalize_bibliotecas
 
 
 if __name__ == '__main__':
     #Extraemos y almacenamos los datos
-    dataframes = create_dataframes()
-    read_files(list_dataframes=dataframes)
+    empty_dataframes = create_dataframes()
+    extract_files(list_dataframes=empty_dataframes)
     
     #Cargamos los datos
-    df_cines = pd.read_csv('cines/2022-September/cines-14-09-22')
-    df_museos = pd.read_csv('museos/2022-September/museos-14-09-22')
-    df_bibliotecas = pd.read_csv('bibliotecas/2022-September/bibliotecas-14-09-22')
+    df_museos, df_cines, df_bibliotecas = load_files()
     
     #Normalizamos las tablas
     df_cines = normalize_cines(df_cines.copy())

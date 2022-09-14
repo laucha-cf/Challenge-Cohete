@@ -1,6 +1,8 @@
 probando.ipynb
 venv_cohete/
 .vscode
-bibliotecas/2022-September
-cines/2022-September
-museos/2022-September
+bibliotecas/
+cines/
+museos/
+__pycache__/
+
