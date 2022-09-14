@@ -34,8 +34,7 @@ def create_path(name):
     month_string = today.strftime('%B')
     path = f"{name}/{today.year}-{month_string}/{name}-{today.strftime('%d-%m-%y')}"
     return path
-
-    
+   
 def read_files(list_dataframes):
     """Lee los tres archivos de tipo spreadsheet y los
     convierte a tipo CSV. Luego los almacena en el entorno local.
@@ -62,9 +61,4 @@ def read_files(list_dataframes):
         os.makedirs(new_dir)
         #Guarda el archivo en el directorio creado
         list_dataframes[i].to_csv(path, index=False)
-        
 
-
-if __name__ == '__main__':
-    dataframes = create_dataframes()
-    read_files(list_dataframes=dataframes)
