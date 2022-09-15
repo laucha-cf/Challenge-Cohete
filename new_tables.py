@@ -33,6 +33,17 @@ def create_new_table(df_master, columnas):
     return df
 
 def data_cinema_table(df_cines):
+    """Retorna un DataFrame con
+        o Provincia
+        o Cantidad de pantallas
+        o Cantidad de butacas
+        o Cantidad de espacios INCAA
+    
+    params:
+        df_cines: DataFrame de cines de los cuáles procesa los datos.
+    return:
+        datos_por_provincia: DataFrame con datos.
+    """
     #Agrupamos por provincia
     df_cines_por_provincia = df_cines.groupby(by=['provincia'])
     #Cantidad de pantallas y butacas
