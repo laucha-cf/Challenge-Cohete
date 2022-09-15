@@ -1,7 +1,7 @@
 import pandas as pd
 from read_files import create_dataframes, extract_files, load_files
 from normalize_data import normalize_museos, normalize_cines, normalize_bibliotecas
-from new_tables import create_master_table, create_new_table
+from new_tables import create_master_table, create_new_table, data_cinema_table
 
 
 if __name__ == '__main__':
@@ -24,7 +24,10 @@ if __name__ == '__main__':
     registros_por_categoria = create_new_table(df_master.copy(),
                                                ['categoria'])
     registros_por_fuente = create_new_table(df_master.copy(), 
-                                            ['categoria'])
+                                            ['fuente'])
     registros_provincia_categoria = create_new_table(df_master.copy(), 
                                                     ['provincia','categoria'])
+    
+    datos_cine_por_prov = data_cinema_table(df_cines=df_cines.copy())
+    datos_cine_por_prov.to_csv('datos_cine.csv', index=False)
     

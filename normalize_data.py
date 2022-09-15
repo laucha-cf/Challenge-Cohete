@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 def normalize_cines(df):
     """Normaliza los campos del dataframe Cines.
@@ -16,6 +17,10 @@ def normalize_cines(df):
                 'categoria','provincia','localidad','nombre',
                 'domicilio','codigo_postal','num_telefono','mail',
                 'web', 'fuente', 'pantallas', 'butacas', 'espacio_INCAA']
+    #Normalizamos los datos dentro de la columna espacio_INCAA
+    df['espacio_INCAA'].replace(to_replace='0', value=np.nan, inplace=True)
+    df['espacio_INCAA'].replace(to_replace='SI', value='si', inplace=True)
+    
     return df
 
 def normalize_museos(df):

@@ -13,7 +13,6 @@ def create_master_table(list_dataframes):
     df_master.insert(loc=0, column='id_row', value=range(len(df_master)))
     return df_master
 
-
 def create_new_table(df_master, columnas):
     """Retorna un DataFrame con la cantidad de registros 
     totales por una o varias columnas especificadas.
@@ -33,3 +32,20 @@ def create_new_table(df_master, columnas):
     
     return df
 
+def data_cinema_table(df_cines):
+    #Agrupamos por provincia
+    df_cines_por_provincia = df_cines.groupby(by=['provincia'])
+    #Cantidad de pantallas y butacas
+    df_pantallas_y_butacas = df_cines_por_provincia[['pantallas', 'butacas']].sum()
+    df_pantallas_y_butacas.reset_index(inplace=True)
+    #Cantidad de espacios INCAA
+    df_espacios_incaa = df_cines_por_provincia[['espacio_INCAA']].count()
+    df_espacios_incaa.reset_index(inplace=True)
+
+    #Agrupamos los datos en una sola tabla
+    datos_por_provincia = pd.concat([
+        df_pantallas_y_butacas,
+        df_espacios_incaa['espacio_INCAA']
+    ], axis=1)
+    
+    return datos_por_provincia
