@@ -1,3 +1,4 @@
+from email.policy import default
 from sqlalchemy import create_engine, Column, Integer, DECIMAL, String, Date, Time
 from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.orm import declarative_base
@@ -44,7 +45,7 @@ def create_dbms(dbms, user, password, host, port, db_name):
     class RegistrosFuente(Base):
         __tablename__ = 'registros_por_fuente'
         id_row = Column(Integer, primary_key=True, autoincrement=True)
-        fuente = Column(String(50))
+        fuente = Column(String(50), default=None)
         cantidad = Column(Integer)
     #Tabla con cantidad de registros por categoría
     class RegistrosCategoria(Base):

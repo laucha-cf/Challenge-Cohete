@@ -4,6 +4,7 @@ from normalize_data import normalize_museos, normalize_cines, normalize_bibliote
 from new_tables import create_master_table, create_new_table, data_cinema_table
 from create_database import create_database, create_dbms, load_db
 
+# - CREDENCIALES - #
 DBMS = 'postgresql'
 USER = 'postgres'
 PASSWORD = 'shakejunt02'
