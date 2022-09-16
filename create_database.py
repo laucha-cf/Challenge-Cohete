@@ -1,7 +1,8 @@
 import datetime as dt
-from sqlalchemy import create_engine, Column, Integer, Date, String
+from sqlalchemy import create_engine, Column, Integer, Date, DateTime, String
 from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.orm import declarative_base
+from sqlalchemy.sql import func
 
 
 def create_dbms(dbms, user, password, host, port, db_name):
@@ -41,21 +42,21 @@ def create_dbms(dbms, user, password, host, port, db_name):
         num_telefono = Column(String(80))
         mail = Column(String(80))
         web = Column(String(80))
-        fecha_carga = Column(Date, default=None)
+        fecha_carga = Column(DateTime(timezone=True), default=func.now())
     #Tabla con cantidad de registros por fuente
     class RegistrosFuente(Base):
         __tablename__ = 'registros_por_fuente'
         id_row = Column(Integer, primary_key=True, autoincrement=True)
         fuente = Column(String(50), default=None)
         cantidad = Column(Integer)
-        #fecha_carga = Column(String(25), default=str(dt.datetime.now()))
+        fecha_carga = Column(DateTime(timezone=True), default=func.now())
     #Tabla con cantidad de registros por categoría
     class RegistrosCategoria(Base):
         __tablename__ = 'registros_por_categoria'
         id_row = Column(Integer, primary_key=True, autoincrement=True)
         categoria = Column(String(80))
         cantidad = Column(Integer)
-        #fecha_carga = Column(Date, default=dt.datetime.now())
+        fecha_carga = Column(DateTime(timezone=True), default=func.now())
     #Tabla con cantidad de registros por provincia y categoría
     class RegistrosProvinciaCat(Base):
         __tablename__ = 'registros_por_provincia_categoria'
@@ -63,7 +64,7 @@ def create_dbms(dbms, user, password, host, port, db_name):
         provincia = Column(String(80))
         categoria = Column(String(80))
         cantidad = Column(Integer)
-        #fecha_carga = Column(DateTime, default=dt.datetime.now())
+        fecha_carga = Column(DateTime(timezone=True), default=func.now())
     #Tabla con datos sobre salas de cine
     class DataCinema(Base):
         __tablename__ = 'data_cinema'
@@ -72,7 +73,7 @@ def create_dbms(dbms, user, password, host, port, db_name):
         pantallas = Column(Integer)
         butacas = Column(Integer)
         espacio_INCAA = Column(Integer)
-        #fecha_carga = Column(DateTime, default=dt.datetime.now())
+        fecha_carga = Column(DateTime(timezone=True), default=func.now())
         
     Base.metadata.create_all(engine)
     

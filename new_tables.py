@@ -13,7 +13,6 @@ def create_master_table(list_dataframes):
     """
     df_master = pd.concat(list_dataframes, axis=0)
     df_master.insert(loc=0, column='id_row', value=range(len(df_master)))
-    df_master['fecha_carga'] = dt.datetime.now()
     
     return df_master
 
@@ -33,6 +32,8 @@ def create_new_table(df_master, columnas):
     df.rename(columns={
         'id_row': 'cantidad'
     }, inplace=True)
+    #Agregamos fecha de carga
+    df['fecha_carga'] = dt.datetime.now()
     
     return df
 
@@ -42,6 +43,7 @@ def data_cinema_table(df_cines):
         o Cantidad de pantallas
         o Cantidad de butacas
         o Cantidad de espacios INCAA
+        o Fecha de carga
     
     params:
         df_cines: DataFrame de cines de los cuáles procesa los datos.
@@ -62,5 +64,7 @@ def data_cinema_table(df_cines):
         df_pantallas_y_butacas,
         df_espacios_incaa['espacio_INCAA']
     ], axis=1)
+    #Agregamos timestamp de carga
+    datos_por_provincia['fecha_carga'] = dt.datetime.now()
     
     return datos_por_provincia

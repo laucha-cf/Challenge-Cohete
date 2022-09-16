@@ -1,6 +1,6 @@
 import pandas as pd
 from read_files import create_dataframes, extract_files, load_files
-from normalize_data import normalize_museos, normalize_cines, normalize_bibliotecas
+from normalize_data import normalize_museos, normalize_cines, normalize_bibliotecas, normalize_master
 from new_tables import create_master_table, create_new_table, data_cinema_table
 from create_database import create_database, create_dbms, load_db
 
@@ -38,6 +38,8 @@ if __name__ == '__main__':
                                                     ['provincia','categoria'])
     
     datos_cine_por_prov = data_cinema_table(df_cines=df_cines.copy())
+    
+    df_master = normalize_master(df_master.copy())
     
     #Creamos la base de datos
     create_dbms(DBMS, USER, PASSWORD, HOST, PORT, DB_NAME)
