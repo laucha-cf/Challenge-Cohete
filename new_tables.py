@@ -1,4 +1,6 @@
 import pandas as pd
+import numpy as np
+import datetime as dt
 
 
 def create_master_table(list_dataframes):
@@ -11,6 +13,8 @@ def create_master_table(list_dataframes):
     """
     df_master = pd.concat(list_dataframes, axis=0)
     df_master.insert(loc=0, column='id_row', value=range(len(df_master)))
+    df_master['fecha_carga'] = dt.datetime.now()
+    
     return df_master
 
 def create_new_table(df_master, columnas):

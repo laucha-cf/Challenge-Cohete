@@ -18,8 +18,8 @@ def normalize_cines(df):
                 'domicilio','codigo_postal','num_telefono','mail',
                 'web', 'fuente', 'pantallas', 'butacas', 'espacio_INCAA']
     #Normalizamos los datos dentro de la columna espacio_INCAA
-    df['espacio_INCAA'].replace(to_replace='0', value=np.nan, inplace=True)
-    df['espacio_INCAA'].replace(to_replace='SI', value='si', inplace=True)
+    df.loc[df['espacio_INCAA']=='0', 'espacio_INCAA'] = np.nan
+    df.loc[df['espacio_INCAA']=='SI', 'espacio_INCAA'] = 'si'
     
     return df
 
