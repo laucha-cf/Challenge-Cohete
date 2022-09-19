@@ -48,11 +48,15 @@ pip freeze
 ### **Ejecución del Proyecto**
 
 1) Establecemos las credenciales correspondientes a nuestra base de datos.
-Nos dirigimos a **main.py**, donde cambiaremos:
-- **USER:** Usuario de nuestro gestor de bases de datos. Por defecto es *'postgres'*.
-- **PASSWORD:** Contraseña de nuestro gestor de bases de datos. Por defecto es *'postgres'*.
-- **PORT:** Por defecto es *5432*.
-- **DB_NAME:** Nombre a elección para nuestra base de datos.
+Creamos un archivo **.env** con el siguiente formato:
+```
+DBMS = 'postgres'
+USER = Usuario de nuestro gestor de bases de datos. Por defecto es 'postgres'.
+PASSWORD = Contraseña de nuestro gestor de bases de datos. Por defecto es 'postgres'.
+HOST = 'localhost'
+PORT = Por defecto es *5432*.
+DB_NAME = Nombre a elección para nuestra base de datos.
+```
 
 2) Ejecutamos el proyecto.
 Nos dirigimos a la terminal de comandos, siempre con el entorno virtual activo.

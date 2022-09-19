@@ -6,3 +6,4 @@ cines/
 museos/
 __pycache__/
 app_logs.log
+.env

@@ -4,15 +4,16 @@ from normalize_data import normalize_museos, normalize_cines, normalize_bibliote
 from new_tables import create_master_table, create_new_table, data_cinema_table
 from create_database import create_database, create_dbms, load_db
 import logging
+from decouple import config
 
 
 # - CREDENCIALES - #
-DBMS = 'postgresql'
-USER = 'postgres'
-PASSWORD = 'shakejunt02'
-HOST = 'localhost'
-PORT = '5432'
-DB_NAME = 'Cohete_DB'
+DBMS = config('DBMS')
+USER = config('USER')
+PASSWORD = config('PASSWORD')
+HOST = config('HOST')
+PORT = config('PORT')
+DB_NAME = config('DB_NAME')
 
 #Establecemos el formato para los loggings
 logging.basicConfig(filename='app_logs.log',
