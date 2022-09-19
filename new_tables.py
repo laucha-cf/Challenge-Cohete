@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import datetime as dt
-
+import logging
 
 def create_master_table(list_dataframes):
     """Crea una tabla única con una list_dataframes
@@ -13,6 +13,8 @@ def create_master_table(list_dataframes):
     """
     df_master = pd.concat(list_dataframes, axis=0)
     df_master.insert(loc=0, column='id_row', value=range(len(df_master)))
+    
+    logging.info('Master table created.')
     
     return df_master
 
@@ -34,6 +36,8 @@ def create_new_table(df_master, columnas):
     }, inplace=True)
     #Agregamos fecha de carga
     df['fecha_carga'] = dt.datetime.now()
+    
+    logging.info('New table created. Filtered by {}.'.format(columnas))
     
     return df
 
@@ -66,5 +70,7 @@ def data_cinema_table(df_cines):
     ], axis=1)
     #Agregamos timestamp de carga
     datos_por_provincia['fecha_carga'] = dt.datetime.now()
+    
+    logging.info('Table with info about Cines created.')
     
     return datos_por_provincia

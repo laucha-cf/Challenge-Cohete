@@ -2,6 +2,7 @@ import pandas as pd
 import datetime as dt
 import os
 import shutil
+import logging
 
 list_categories = ['museos', 'cines', 'bibliotecas']
 
@@ -65,9 +66,11 @@ def extract_files(list_dataframes):
             shutil.rmtree(f'{list_categories[i]}/')
 
         os.makedirs(new_dir)
+        logging.info('Directory {}/ created.'.format(list_categories[i]))
         
         #Guarda el archivo en el directorio creado
         list_dataframes[i].to_csv(path, index=False)
+        logging.info('Dataframe {} saved.'.format(list_categories[i]))
                
 def load_files():
     """Retorna los archivos previamente almacenados.

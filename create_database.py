@@ -3,7 +3,7 @@ from sqlalchemy import create_engine, Column, Integer, Date, DateTime, String
 from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.sql import func
-
+import logging
 
 def create_dbms(dbms, user, password, host, port, db_name):
     """Crea la base de datos y las tablas
@@ -22,6 +22,7 @@ def create_dbms(dbms, user, password, host, port, db_name):
     engine = create_engine(f'{dbms}://{user}:{password}@{host}:{port}/{db_name}')
     if not database_exists(engine.url):
         create_database(engine.url)
+        logging.info('Database {} created correctly.'.format(db_name))
     
     #Se utiliza para declarar y crear las tablas
     Base = declarative_base()
@@ -77,6 +78,8 @@ def create_dbms(dbms, user, password, host, port, db_name):
         
     Base.metadata.create_all(engine)
     
+    logging.info('Tables created correctly.')
+    
     #Cerramos la conexión
     engine.dispose()
 
@@ -89,6 +92,7 @@ def fill_table(dataframe, name, engine):
         None
     """
     dataframe.to_sql(name, engine, if_exists='replace', index=False, method='multi')
+    logging.info('Table {} loaded correctly.'.format(name))
 
 def load_db(to_load, dbms, user, password, host, port, db_name):
     """Carga las tablas de la base de datos en este orden

@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import datetime as dt
+import logging
 
 def normalize_cines(df):
     """Normaliza los campos del dataframe Cines.
@@ -22,6 +23,8 @@ def normalize_cines(df):
     df.loc[df['espacio_INCAA']=='0', 'espacio_INCAA'] = np.nan
     df.loc[df['espacio_INCAA']=='SI', 'espacio_INCAA'] = 'si'
     
+    logging.info('Normalized Cines table.')
+    
     return df
 
 def normalize_museos(df):
@@ -39,6 +42,7 @@ def normalize_museos(df):
                 'categoria','provincia','localidad','nombre',
                 'domicilio','codigo_postal','num_telefono','mail',
                 'web', 'fuente']
+    logging.info('Normalized Museos table.')
     return df
 
 def normalize_bibliotecas(df):
@@ -56,6 +60,7 @@ def normalize_bibliotecas(df):
                 'categoria','provincia','localidad','nombre',
                 'domicilio','codigo_postal','num_telefono','mail',
                 'web', 'fuente']
+    logging.info('Normalized Bibliotecas table.')
     return df
 
 def normalize_master(df_master):
@@ -75,5 +80,7 @@ def normalize_master(df_master):
              'web']]
     #Agregamos timestamp de carga
     df_ready['fecha_carga'] = dt.datetime.now()
+    
+    logging.info('Normalized Master table.')
     
     return df_ready

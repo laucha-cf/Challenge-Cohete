@@ -3,6 +3,8 @@ from read_files import create_dataframes, extract_files, load_files
 from normalize_data import normalize_museos, normalize_cines, normalize_bibliotecas, normalize_master
 from new_tables import create_master_table, create_new_table, data_cinema_table
 from create_database import create_database, create_dbms, load_db
+import logging
+
 
 # - CREDENCIALES - #
 DBMS = 'postgresql'
@@ -12,6 +14,10 @@ HOST = 'localhost'
 PORT = '5432'
 DB_NAME = 'Cohete_DB'
 
+#Establecemos el formato para los loggings
+logging.basicConfig(filename='app_logs.log',
+                    level=logging.INFO,
+                    format='%(asctime)s:%(levelname)s:%(message)s')
 
 if __name__ == '__main__':
     #Extraemos y almacenamos los datos
