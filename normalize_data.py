@@ -3,6 +3,8 @@ import numpy as np
 import datetime as dt
 import logging
 
+pd.options.mode.chained_assignment = None
+
 def normalize_cines(df):
     """Normaliza los campos del dataframe Cines.
     

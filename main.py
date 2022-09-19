@@ -16,6 +16,7 @@ PORT = config('PORT')
 DB_NAME = config('DB_NAME')
 
 #Establecemos el formato para los loggings
+logging.FileHandler(filename='app_logs.log', mode='w')
 logging.basicConfig(filename='app_logs.log',
                     level=logging.INFO,
                     format='%(asctime)s:%(levelname)s:%(message)s')
