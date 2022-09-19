@@ -30,24 +30,32 @@ if __name__ == '__main__':
     df_master = create_master_table([df_cines, df_museos, df_bibliotecas])
     
     #Creamos nuevas tablas
-    registros_por_categoria = create_new_table(df_master.copy(),
-                                               ['categoria'])
-    registros_por_fuente = create_new_table(df_master.copy(), 
-                                            ['fuente'])
-    registros_provincia_categoria = create_new_table(df_master.copy(), 
-                                                    ['provincia','categoria'])
+    registros_por_categoria = create_new_table(
+                                            df_master.copy(),
+                                            ['categoria']
+                                        )
+    registros_por_fuente = create_new_table(
+                                            df_master.copy(), 
+                                            ['fuente']
+                                        )
+    registros_provincia_categoria = create_new_table(
+                                            df_master.copy(), 
+                                            ['provincia','categoria']
+                                            )
     
-    datos_cine_por_prov = data_cinema_table(df_cines=df_cines.copy())
+    datos_cine_por_prov = data_cinema_table( df_cines=df_cines.copy() )
     
-    df_master = normalize_master(df_master.copy())
+    #Normalizamos la tabla única para su carga
+    df_master = normalize_master( df_master.copy() )
     
     #Creamos la base de datos
-    create_dbms(DBMS, USER, PASSWORD, HOST, PORT, DB_NAME)
+    create_dbms( DBMS, USER, PASSWORD, HOST, PORT, DB_NAME )
     
+    #Seleccionamos los dataframes a cargar
     dataframes_to_load = [df_master,
                           registros_por_categoria,
                           registros_por_fuente,
                           registros_provincia_categoria,
                           datos_cine_por_prov]
     #Cargamos los datos a las tablas
-    load_db(dataframes_to_load, DBMS, USER, PASSWORD, HOST, PORT, DB_NAME)
+    load_db( dataframes_to_load, DBMS, USER, PASSWORD, HOST, PORT, DB_NAME )

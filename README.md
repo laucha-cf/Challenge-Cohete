@@ -1,5 +1,5 @@
 # Cohete Challenge
-Para desplegar el proyecto en un entorno virtual (virtualenv) deberá concretar los siguientes pasos:
+### **Creación y activación de un entorno virtual (virtualenv)**
 
 - Abrir la consola de comandos (cmd). Una vez en la misma ejecutar:
 
@@ -33,3 +33,31 @@ Pasaría a lo siguiente
 ```
 ("nombre_entorno") UnaDirección/algoMas
 ```
+6) Instalar las librerías dentro de el archivo **requirements.txt**.
+```
+pip install -r /dirección/requirements.txt
+```
+7) Verificar que se hayan instalado correctamente. 
+```
+pip list
+```
+o
+```
+pip freeze
+```
+### **Ejecución del Proyecto**
+
+1) Establecemos las credenciales correspondientes a nuestra base de datos.
+Nos dirigimos a **main.py**, donde cambiaremos:
+- **USER:** Usuario de nuestro gestor de bases de datos. Por defecto es *'postgres'*.
+- **PASSWORD:** Contraseña de nuestro gestor de bases de datos. Por defecto es *'postgres'*.
+- **PORT:** Por defecto es *5432*.
+- **DB_NAME:** Nombre a elección para nuestra base de datos.
+
+2) Ejecutamos el proyecto.
+Nos dirigimos a la terminal de comandos, siempre con el entorno virtual activo.
+Ejecutamos:
+```
+py main.py
+```
+
