@@ -2,6 +2,8 @@ import pandas as pd
 import datetime as dt
 import os
 import shutil
+import requests
+from io import StringIO
 import logging
 
 list_categories = ['museos', 'cines', 'bibliotecas']
@@ -40,22 +42,28 @@ def create_path(name):
     return path
    
 def extract_files(list_dataframes):
-    """Lee los tres archivos de tipo spreadsheet y los
-    convierte a tipo CSV. Luego los almacena en el entorno local.
+    """Lee los tres archivos de tipo spreadsheet utilizando requests 
+    y los convierte a tipo CSV. Luego los almacena en el entorno local.
     
     params:
         list_dataframes: Lista de dataframes
     return:
         None 
     """
+    # - IDs de las spreadsheets - #
     list_spreadsheet_id = ['1PS2_yAvNVEuSY0gI8Nky73TQMcx_G1i18lm--jOGfAA',
                            '1o8QeMOKWm4VeZ9VecgnL8BWaOlX5kdCDkXoAph37sQM',
                            '1udwn61l_FZsFsEuU8CMVkvU2SpwPW3Krt1OML3cYMYk']
 
     for i, sheet_id in enumerate(list_spreadsheet_id):
         url = f'https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet'
-        url = url.format(sheet_id, list_categories[i])
-        list_dataframes[i] = pd.read_csv(url)
+        response = requests.get(url)
+        #Convertimos de Bytes a String
+        s = str(response.content, 'utf-8')
+        #Lo seteamos cómo archivo
+        data = StringIO(s)
+        #Almacenamos su contenido cómo dataframe
+        list_dataframes[i] = pd.read_csv(data)
         #Crea el path donde se almacenará el archivo (si no existe)
         path = create_path(list_categories[i])
         #Crea el nuevo directorio donde se almacenará
