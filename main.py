@@ -1,8 +1,8 @@
 import pandas as pd
-from read_files import create_dataframes, extract_files, load_files
-from normalize_data import normalize_museos, normalize_cines, normalize_bibliotecas, normalize_master
-from new_tables import create_master_table, create_new_table, data_cinema_table
-from create_database import create_database, create_dbms, load_db
+from modules.read_files import create_dataframes, extract_files, load_files
+from modules.normalize_data import normalize_museos, normalize_cines, normalize_bibliotecas, normalize_master
+from modules.new_tables import create_master_table, create_new_table, data_cinema_table
+from modules.create_database import create_dbms, load_db
 import logging
 from decouple import config
 
